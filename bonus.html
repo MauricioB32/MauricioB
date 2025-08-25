@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Bonus - Números entre -225 y 450</title>
+</head>
+<body>
+    <h2>Generar números entre -225 y 450</h2>
+    <label>Cantidad de números a generar:</label>
+    <input type="number" id="cantidad" min="1">
+    <button onclick="generarNumeros()">Generar</button>
+    <div id="resultado"></div>
+
+    <script>
+        function generarNumeros() {
+            const cantidad = parseInt(document.getElementById('cantidad').value);
+            const resultado = document.getElementById('resultado');
+
+            if (isNaN(cantidad) || cantidad <= 0) {
+                resultado.textContent = "Por favor, ingresa una cantidad válida mayor a 0.";
+                return;
+            }
+
+            let mayoresCero = 0;
+            let menoresCero = 0;
+            let igualesCero = 0;
+            let numeros = [];
+
+            for (let i = 0; i < cantidad; i++) {
+                let num = Math.floor(Math.random() * (450 - (-225) + 1)) + (-225);
+                numeros.push(num);
+
+                if (num > 0) mayoresCero++;
+                else if (num < 0) menoresCero++;
+                else igualesCero++;
+            }
+
+            resultado.innerHTML = `
+                <p><strong>Números generados:</strong> ${numeros.join(", ")}</p>
+                <p>Cantidad mayores que 0: ${mayoresCero}</p>
+                <p>Cantidad menores que 0: ${menoresCero}</p>
+                <p>Cantidad iguales a 0: ${igualesCero}</p>
+            `;
+        }
+    </script>
+</body>
+</html>

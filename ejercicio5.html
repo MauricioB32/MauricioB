@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 5 - Números Aleatorios</title>
+</head>
+<body>
+    <h2>Generar 20 números aleatorios (1 al 70)</h2>
+    <button onclick="ejecutarEjercicio()">Generar y Analizar</button>
+    <div id="resultado"></div>
+
+    <script>
+        function ejecutarEjercicio() {
+            const numeros = [];
+            for (let i = 0; i < 20; i++) {
+                const aleatorio = Math.floor(Math.random() * 70) + 1;
+                numeros.push(aleatorio);
+            }
+
+            // a. Contar impares múltiplos de 8
+            let imparesMult8 = 0;
+            for (let num of numeros) {
+                if (num % 2 !== 0 && num % 8 === 0) {
+                    imparesMult8++;
+                }
+            }
+
+            // b. Promedio de los pares
+            let sumaPares = 0;
+            let cantidadPares = 0;
+            for (let num of numeros) {
+                if (num % 2 === 0) {
+                    sumaPares += num;
+                    cantidadPares++;
+                }
+            }
+            let promedioPares = cantidadPares > 0 ? (sumaPares / cantidadPares).toFixed(2) : "No hay pares";
+
+            // c. Número mayor múltiplo de 7
+            let mayorMult7 = null;
+            for (let num of numeros) {
+                if (num % 7 === 0 && (mayorMult7 === null || num > mayorMult7)) {
+                    mayorMult7 = num;
+                }
+            }
+
+            // d. Contar cuántas veces aparecen 6, 11 y 17
+            let contador6 = 0, contador11 = 0, contador17 = 0;
+            for (let num of numeros) {
+                if (num === 6) contador6++;
+                if (num === 11) contador11++;
+                if (num === 17) contador17++;
+            }
+
+            // Mostrar resultados
+            const resultado = document.getElementById("resultado");
+            resultado.innerHTML = `
+                <p><strong>Números generados:</strong> ${numeros.join(", ")}</p>
+                <p>a. Impares múltiplos de 8: ${imparesMult8}</p>
+                <p>b. Promedio de pares: ${promedioPares}</p>
+                <p>c. Mayor múltiplo de 7: ${mayorMult7 !== null ? mayorMult7 : "Ninguno"}</p>
+                <p>d. Veces que se generó el 6: ${contador6}</p>
+                <p>   Veces que se generó el 11: ${contador11}</p>
+                <p>   Veces que se generó el 17: ${contador17}</p>
+            `;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Notas y Promedio</title>
+</head>
+<body>
+    <h2>Verificar Notas y Calcular Promedio</h2>
+    <button onclick="pedirNotas()">Iniciar</button>
+    <p id="resultado"></p>
+
+    <script>
+        function pedirNotas() {
+            let intentos = 0;
+            let notasValidas = false;
+
+            while (!notasValidas) {
+                intentos++;
+                let notas = [];
+                let validas = true;
+
+                for (let i = 1; i <= 5; i++) {
+                    let nota = parseFloat(prompt("Ingresa la nota " + i + " (entre 0 y 5):"));
+
+                    if (isNaN(nota) || nota < 0 || nota > 5) {
+                        alert("Nota inválida. Debes ingresar un número entre 0 y 5.");
+                        validas = false;
+                        break;
+                    }
+
+                    notas.push(nota);
+                }
+
+                if (validas) {
+                    notasValidas = true;
+
+                    let suma = 0;
+                    for (let i = 0; i < notas.length; i++) {
+                        suma += notas[i];
+                    }
+
+                    let promedio = suma / notas.length;
+                    let mensaje = "Promedio: " + promedio.toFixed(2) + " - ";
+
+                    if (promedio >= 3) {
+                        mensaje += "Aprobado.";
+                    } else {
+                        mensaje += "Reprobado.";
+                    }
+
+                    mensaje += " Intentos usados: " + intentos;
+
+                    document.getElementById("resultado").textContent = mensaje;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

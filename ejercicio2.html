@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Factorial</title>
+</head>
+<body>
+    <h2>Calcular Factorial</h2>
+    <label>Ingresa un número del 1 al 10:</label>
+    <input type="number" id="numero" min="1" max="10">
+    <button onclick="calcularFactorial()">Calcular</button>
+    <p id="resultado"></p>
+
+    <script>
+        function calcularFactorial() {
+            const numero = parseInt(document.getElementById('numero').value);
+            const resultado = document.getElementById('resultado');
+
+            if (isNaN(numero) || numero < 1 || numero > 10) {
+                resultado.textContent = "Por favor, ingresa un número válido entre 1 y 10.";
+                return;
+            }
+
+            let factorial = 1;
+            for (let i = 1; i <= numero; i++) {
+                factorial *= i;
+            }
+
+            resultado.textContent = "El factorial de " + numero + " es: " + factorial;
+        }
+    </script>
+</body>
+</html>

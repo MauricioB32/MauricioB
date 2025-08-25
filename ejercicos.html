@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Adivina el Número</title>
+</head>
+<body>
+
+    <h1>Juego: Adivina el Número</h1>
+    <p>Introduce un número del 1 al 70:</p>
+
+    <input type="number" id="guessInput">
+    <button onclick="checkGuess()">Adivinar</button>
+
+    <p id="message"></p>
+
+    <script>
+        // Genera el número secreto una vez
+        const secretNumber = Math.floor(Math.random() * 70) + 1;
+
+        function checkGuess() {
+            // Obtener los elementos del HTML
+            const guessInput = document.getElementById('guessInput');
+            const message = document.getElementById('message');
+
+            // Convertir la entrada del usuario a un número entero
+            const userGuess = parseInt(guessInput.value);
+
+            // Comparar y mostrar el mensaje correspondiente
+            if (userGuess < secretNumber) {
+                message.textContent = 'El número es MAYOR.';
+            } else if (userGuess > secretNumber) {
+                message.textContent = 'El número es MENOR.';
+            } else if (userGuess === secretNumber) {
+                message.textContent = `¡Correcto! El número era ${secretNumber}.`;
+                // Deshabilitar el input y el botón al ganar
+                guessInput.disabled = true;
+                document.querySelector('button').disabled = true;
+            } else {
+                message.textContent = 'Por favor, introduce un número válido.';
+            }
+        }
+    </script>
+
+</body>
+</html>
